@@ -4,7 +4,8 @@
 
 std_msgs/Header header
 
-uint16 CONTRACT_VERSION=1         # current version of this interface
+uint16 CONTRACT_VERSION=2         # current version of this interface — bumped 1->2 for
+                                   # site_config (field addition, see CONTRACT.md)
 uint16 contract_version           # producer sets this to CONTRACT_VERSION
 
 string profile_id
@@ -31,6 +32,10 @@ NavTaskStatus task
 RecoveryStatus recovery
 ProtectionStatus protection
 ActiveConstraint[] constraints
+SiteConfigStatus site_config      # added in CONTRACT_VERSION 2 (platform-sw#36,
+                                   # interfaces#27) - map/site-config identity and
+                                   # floor-coverage. UNKNOWN until the producer has
+                                   # loaded a site profile and compared it.
 # base/I8 controller has no dedicated status yet - see reason codes below
 
 # reason codes: 0=NONE everywhere, groups start at x001, append-only
@@ -80,6 +85,7 @@ uint16 PROTECTION_STATE_UNKNOWN=6004
 uint16 SPEED_LIMIT_ACTIVE=6005
 uint16 REVERSE_SPEED_LIMITED=6006
 uint16 MOTION_SOURCE_PARTIALLY_PROTECTED=6007   # PARTIAL collision-monitor coverage, distinct from fully UNPROTECTED
+uint16 COLLISION_APPROACH_ACTIVE=6008           # collision_monitor's "approach" polygon has triggered
 
 # docking
 uint16 DOCK_ENGAGEMENT_UNKNOWN=7001
@@ -103,3 +109,13 @@ uint16 ESTOP_ACTIVE=9003          # only on fresh I8 telemetry reporting E-stop
                                    # active; stale/missing telemetry is
                                    # BASE_LINK_LOST/BASE_NOT_READY, not this
 uint16 BATTERY_LOW=9004
+
+# site configuration (CONTRACT_VERSION 2, platform-sw#36 / interfaces#27)
+uint16 SITE_CONFIG_NOT_LOADED=10001
+uint16 MAP_ID_MISMATCH=10002
+uint16 MAP_STALE=10003
+uint16 CONFIG_ID_MISMATCH=10004
+uint16 FLOOR_COVERAGE_INSUFFICIENT=10005   # a required zone is missing - blocks readiness
+uint16 SITE_CONFIG_UNKNOWN=10006
+uint16 FLOOR_COVERAGE_OPTIONAL_GAP=10007   # only an optional zone is missing - degrades
+                                            # health, does not block readiness

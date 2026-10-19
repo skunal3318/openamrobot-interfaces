@@ -24,7 +24,8 @@ producer has gone silent from staleness alone.
 ## Versioning
 
 `NavigationStatus.contract_version` is set by the producer to
-`NavigationStatus.CONTRACT_VERSION` (currently `1`).
+`NavigationStatus.CONTRACT_VERSION` (currently `2` — bumped from `1` for the
+`site_config` field addition, platform-sw#36 / interfaces#27).
 
 - Adding a reason code or enum constant does not require a version bump.
 - Adding, removing, renaming, reordering, or retyping a message field
@@ -49,6 +50,11 @@ should not be read as a real value.
 - `DockingStatus`: `phase`, `lateral_error_m`, `yaw_error_rad`, and
   `visible_tag_count` are only meaningful while `activity` is `ACTIVITY_DOCKING`
   or `ACTIVITY_UNDOCKING`.
+- `SiteConfigStatus`: `map_id`, `map_version`, `config_id`, and `config_version`
+  are `""` when `state` is `STATE_UNKNOWN` or `STATE_MISSING`. `floor_coverage`
+  is only meaningful when `state == STATE_MATCHED` — every other state leaves
+  it `COVERAGE_UNKNOWN`, since coverage isn't evaluated until identity has
+  already been confirmed.
 - Any `reason` field is `NONE` exactly when its associated state/enum is in
   its "nothing wrong" value (e.g. `coverage == COVERAGE_PROTECTED`,
   `health == HEALTH_OK`); otherwise it should be non-`NONE`.

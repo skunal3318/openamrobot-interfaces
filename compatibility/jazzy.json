@@ -251,13 +251,21 @@
               "type": "uint16",
               "value": 9004
             },
+            "msg/COLLISION_APPROACH_ACTIVE": {
+              "type": "uint16",
+              "value": 6008
+            },
             "msg/COLLISION_LAYER_INACTIVE": {
               "type": "uint16",
               "value": 6001
             },
+            "msg/CONFIG_ID_MISMATCH": {
+              "type": "uint16",
+              "value": 10004
+            },
             "msg/CONTRACT_VERSION": {
               "type": "uint16",
-              "value": 1
+              "value": 2
             },
             "msg/CONTROLLER_TIMEOUT": {
               "type": "uint16",
@@ -290,6 +298,14 @@
             "msg/ESTOP_ACTIVE": {
               "type": "uint16",
               "value": 9003
+            },
+            "msg/FLOOR_COVERAGE_INSUFFICIENT": {
+              "type": "uint16",
+              "value": 10005
+            },
+            "msg/FLOOR_COVERAGE_OPTIONAL_GAP": {
+              "type": "uint16",
+              "value": 10007
             },
             "msg/GOAL_BLOCKED": {
               "type": "uint16",
@@ -334,6 +350,14 @@
             "msg/LOCAL_BLOCKED": {
               "type": "uint16",
               "value": 4008
+            },
+            "msg/MAP_ID_MISMATCH": {
+              "type": "uint16",
+              "value": 10002
+            },
+            "msg/MAP_STALE": {
+              "type": "uint16",
+              "value": 10003
             },
             "msg/MOTION_SOURCE_PARTIALLY_PROTECTED": {
               "type": "uint16",
@@ -439,6 +463,14 @@
               "type": "uint16",
               "value": 2005
             },
+            "msg/SITE_CONFIG_NOT_LOADED": {
+              "type": "uint16",
+              "value": 10001
+            },
+            "msg/SITE_CONFIG_UNKNOWN": {
+              "type": "uint16",
+              "value": 10006
+            },
             "msg/SPEED_LIMIT_ACTIVE": {
               "type": "uint16",
               "value": 6005
@@ -464,7 +496,7 @@
               "value": 7006
             }
           },
-          "type_hash": "RIHS01_7137c1af27b948f92166db373d12b1930fba5742b56245450882454ca79af105"
+          "type_hash": "RIHS01_890db179ce478038c2c60cfd7007b050415131adca5039f8b0fb3059858e792c"
         },
         "msg/ParkingStatus": {
           "constants": {
@@ -601,6 +633,47 @@
             }
           },
           "type_hash": "RIHS01_22dd3f90ae89de88458a37d3e6fcef83fac8c0c4f6f5b764642a5ddc7de76c61"
+        },
+        "msg/SiteConfigStatus": {
+          "constants": {
+            "msg/COVERAGE_FULL": {
+              "type": "uint8",
+              "value": 3
+            },
+            "msg/COVERAGE_INSUFFICIENT": {
+              "type": "uint8",
+              "value": 1
+            },
+            "msg/COVERAGE_PARTIAL": {
+              "type": "uint8",
+              "value": 2
+            },
+            "msg/COVERAGE_UNKNOWN": {
+              "type": "uint8",
+              "value": 0
+            },
+            "msg/STATE_MATCHED": {
+              "type": "uint8",
+              "value": 1
+            },
+            "msg/STATE_MISMATCHED": {
+              "type": "uint8",
+              "value": 2
+            },
+            "msg/STATE_MISSING": {
+              "type": "uint8",
+              "value": 4
+            },
+            "msg/STATE_STALE": {
+              "type": "uint8",
+              "value": 3
+            },
+            "msg/STATE_UNKNOWN": {
+              "type": "uint8",
+              "value": 0
+            }
+          },
+          "type_hash": "RIHS01_f267da6162efc701bfb4fa698ed335eef407875ba8e3b4476ac32b71eaedff00"
         }
       },
       "package_version": "0.0.0"

@@ -9,6 +9,7 @@ find_package(std_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/NavigationStatus.msg"
+  "msg/SiteConfigStatus.msg"
   "msg/NavStackStatus.msg"
   "msg/LocalizationStatus.msg"
   "msg/SensorStatus.msg"

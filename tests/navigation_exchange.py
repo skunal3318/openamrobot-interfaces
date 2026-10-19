@@ -37,6 +37,15 @@ def publish(topic, ready):
         message.navigation_readiness = NavigationStatus.NAVIGATION_READINESS_NOT_READY
         message.not_ready_reasons = [NavigationStatus.BASE_LINK_LOST]
         message.active_reasons = [NavigationStatus.BASE_LINK_LOST]
+        # CONTRACT_VERSION 2: site_config round-trips as a nested field, same as the
+        # existing sensors[] / stack / localization sub-messages below.
+        message.site_config.state = message.site_config.STATE_MATCHED
+        message.site_config.floor_coverage = message.site_config.COVERAGE_FULL
+        message.site_config.reason = NavigationStatus.NONE
+        message.site_config.map_id = "verification-map"
+        message.site_config.map_version = "a" * 64
+        message.site_config.config_id = "verification-config"
+        message.site_config.config_version = "b" * 64
         sensor = SensorStatus()
         sensor.id = "test-lidar"
         sensor.kind = SensorStatus.KIND_LIDAR
@@ -80,6 +89,17 @@ def check_values(message):
         "test-lidar", SensorStatus.KIND_LIDAR, SensorStatus.STATE_OK, 10.0, True
     ):
         raise RuntimeError("FAIL: nested sensor values did not round-trip")
+    site_config = message.site_config
+    if (
+        site_config.state != site_config.STATE_MATCHED
+        or site_config.floor_coverage != site_config.COVERAGE_FULL
+        or site_config.reason != NavigationStatus.NONE
+        or site_config.map_id != "verification-map"
+        or site_config.map_version != "a" * 64
+        or site_config.config_id != "verification-config"
+        or site_config.config_version != "b" * 64
+    ):
+        raise RuntimeError("FAIL: site_config (CONTRACT_VERSION 2) did not round-trip")
 
 
 def consume():
@@ -87,6 +107,15 @@ def consume():
     # Exit 42 is reserved for this exact consumer requirement, never a timeout.
     if NavigationStatus.get_fields_and_field_types().get("thresholds_id") != "string":
         print("CONTRACT_MISMATCH: NavigationStatus.thresholds_id expected string", flush=True)
+        return 42
+    site_config_type = NavigationStatus.get_fields_and_field_types().get("site_config")
+    if site_config_type != "openamr_nav_msgs/SiteConfigStatus":
+        print(
+            "CONTRACT_MISMATCH: NavigationStatus.site_config missing or wrong type "
+            f"(CONTRACT_VERSION 2 expected, got {site_config_type!r}) - this exit code "
+            "is also what a deliberately-reverted install should produce",
+            flush=True,
+        )
         return 42
     print(f"RMW loaded: {rclpy.utilities.get_rmw_implementation_identifier()}", flush=True)
     topic = f"/interface_verification/navigation_{uuid.uuid4().hex}"
