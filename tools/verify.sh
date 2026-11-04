@@ -18,6 +18,34 @@ finish() {
 }
 trap finish EXIT
 
+# Prepare declared dependencies in the shared quality/test container.
+# The standalone ros2-jazzy.yml workflow already has these prerequisites;
+# this idempotent CI-only bootstrap also supports the shared clean image.
+if [ "${CI:-}" = "true" ]; then
+  stage=ci-ros-bootstrap
+  needs_apt=false
+  for pkg in python3-colcon-common-extensions python3-rosdep \
+      python3-jsonschema python3-yaml ros-jazzy-rmw-fastrtps-cpp \
+      ros-jazzy-rmw-cyclonedds-cpp; do
+    dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null |
+      grep -qx 'install ok installed' || needs_apt=true
+  done
+  if [ "$needs_apt" = true ]; then
+    apt-get update
+    apt-get install -y --no-install-recommends \
+      python3-colcon-common-extensions python3-rosdep python3-jsonschema \
+      python3-yaml ros-jazzy-rmw-fastrtps-cpp ros-jazzy-rmw-cyclonedds-cpp
+  fi
+  if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+    rosdep init
+  fi
+  if [ ! -d "${ROS_HOME:-$HOME/.ros}/rosdep/sources.cache" ]; then
+    rosdep update --rosdistro jazzy
+  fi
+  rosdep install --from-paths "$root/ros2" --ignore-src --rosdistro jazzy -y
+  stage=prerequisites
+fi
+
 # Never inherit ROS overlays, Python paths or CMake prefixes from the caller.
 mkdir -p "$run/home/.ros"
 # rosdep's downloaded index is prerequisite data, not a developer overlay.
