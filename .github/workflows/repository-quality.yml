@@ -12,3 +12,6 @@ jobs:
   repository-quality:
     name: repository-quality
     uses: openAMRobot/.github/.github/workflows/repository-quality-reusable.yml@main
+    with:
+      verify: true
+      verify_container: ros:jazzy-ros-base
