@@ -19,6 +19,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ActiveConstraint.msg"
   "msg/DockingStatus.msg"
   "msg/ParkingStatus.msg"
+  "msg/StopState.msg"
   DEPENDENCIES
     builtin_interfaces
     std_msgs
