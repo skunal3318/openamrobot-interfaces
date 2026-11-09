@@ -24,6 +24,15 @@ The PR evidence check fails when STATE.md exists and a PR neither updates it nor
   `DockingStatus.msg` carries no charging or contact state). Watchdog decisions check: 0
   findings at e63311d (2026-10-17).
 
+## PR #28 snapshot follow-up (2026-11-09)
+
+- Based on fbb7b3f: compatibility/jazzy.json now includes MapIdentity from
+  exact-head hosted artifact 13579087673 (run 42384588332). Existing interface
+  hashes, definitions and versions are unchanged. Local compatibility tests pass.
+- MapIdentity #34 remains Proposed; no owner acceptance is implied. PR #28
+  still requires author DCO correction and downstream producer/observer review.
+- Fresh ROS verification is pending; local Docker is unavailable.
+
 ## Known gaps
 
 - Harness rollout steps (b) to (e) not done as of main 87ab8a9: `repository-quality` calls the
