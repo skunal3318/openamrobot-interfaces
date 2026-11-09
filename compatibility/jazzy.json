@@ -126,6 +126,10 @@
           },
           "type_hash": "RIHS01_f5a05b28ee0b7c650fd5ede3f8d0f9397fb7e8010888b5ab7b54b52152806b2b"
         },
+        "msg/MapIdentity": {
+          "constants": {},
+          "type_hash": "RIHS01_0cbe17d0f2b337c6295c945c8f2570c596d6628ac475bd6c4ae0495969a2ad17"
+        },
         "msg/MotionSourceCoverage": {
           "constants": {
             "msg/COVERAGE_PARTIAL": {
