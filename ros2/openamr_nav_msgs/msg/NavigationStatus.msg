@@ -4,7 +4,7 @@
 
 std_msgs/Header header
 
-uint16 CONTRACT_VERSION=1         # current version of this interface
+uint16 CONTRACT_VERSION=2         # bumped for StopState.msg (platform-sw#119/#90)
 uint16 contract_version           # producer sets this to CONTRACT_VERSION
 
 string profile_id
