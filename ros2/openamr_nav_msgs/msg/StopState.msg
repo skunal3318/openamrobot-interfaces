@@ -1,8 +1,10 @@
 # Stop (software) gate state, platform-sw#119 (Alex's Option B decision, 5 Nov 2026).
 #
-# Published by safety_stop_gate_node (platform-sw) on /safety/stop_lock's replacement
-# contract. Supersedes inferring gate state from /safety/stop_lock (a plain Bool) plus
-# guesswork about the since-removed Twist-based rearm latch.
+# Published by safety_stop_gate_node (platform-sw) on /safety/stop_state: status
+# telemetry published next to /safety/stop_lock, not a replacement for it -
+# /safety/stop_lock (a plain Bool) stays the actual input twist_mux uses. Supersedes
+# inferring gate state from /safety/stop_lock's value plus guesswork about the
+# since-removed Twist-based rearm latch, for human/UI-facing status only.
 #
 # RELEASE_REFUSED means a release was requested (the service was called) but withheld
 # because the gate's own release conditions were not yet satisfied - not that the lock
