@@ -17,6 +17,7 @@ The PR evidence check fails when STATE.md exists and a PR neither updates it nor
 |---|---|---|---|
 | C10 dataset quality gate | PR #25 | draft / synthetic evidence only | Work-package owner reviews placement and supplies real-episode evidence |
 | Shared rules v2 (rollout step a, pilot) | PR #26 | in review | merge, then step (b) pin the harness |
+| StopState.msg for the stop-gate contract (platform-sw#119) | PR #35 | changes requested (panthera-momagdii) - rebased on main `14912e1`, hosted CI/DCO/CLA green at head `025ee28caf7e72b31e9b134d09e5fa3a8606aac0` | push, Mohamed approves same day; then platform-sw#90 repins nav-status-tests.yml from the fork pin to the merge SHA |
 
 ## Decisions this repository implements
 
