@@ -261,7 +261,7 @@
             },
             "msg/CONTRACT_VERSION": {
               "type": "uint16",
-              "value": 1
+              "value": 2
             },
             "msg/CONTROLLER_TIMEOUT": {
               "type": "uint16",
@@ -605,6 +605,23 @@
             }
           },
           "type_hash": "RIHS01_22dd3f90ae89de88458a37d3e6fcef83fac8c0c4f6f5b764642a5ddc7de76c61"
+        },
+        "msg/StopState": {
+          "constants": {
+            "msg/STATE_LOCKED": {
+              "type": "uint8",
+              "value": 0
+            },
+            "msg/STATE_RELEASE_REFUSED": {
+              "type": "uint8",
+              "value": 1
+            },
+            "msg/STATE_RUNNING": {
+              "type": "uint8",
+              "value": 2
+            }
+          },
+          "type_hash": "RIHS01_e0e027765102526c80b189589a780e5900e41fcd8cacb4c74c13d19e4c7ccc80"
         }
       },
       "package_version": "0.0.0"
