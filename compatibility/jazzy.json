@@ -126,6 +126,10 @@
           },
           "type_hash": "RIHS01_f5a05b28ee0b7c650fd5ede3f8d0f9397fb7e8010888b5ab7b54b52152806b2b"
         },
+        "msg/MapIdentity": {
+          "constants": {},
+          "type_hash": "RIHS01_0cbe17d0f2b337c6295c945c8f2570c596d6628ac475bd6c4ae0495969a2ad17"
+        },
         "msg/MotionSourceCoverage": {
           "constants": {
             "msg/COVERAGE_PARTIAL": {
@@ -265,7 +269,7 @@
             },
             "msg/CONTRACT_VERSION": {
               "type": "uint16",
-              "value": 2
+              "value": 3
             },
             "msg/CONTROLLER_TIMEOUT": {
               "type": "uint16",
@@ -674,6 +678,23 @@
             }
           },
           "type_hash": "RIHS01_f267da6162efc701bfb4fa698ed335eef407875ba8e3b4476ac32b71eaedff00"
+        },
+        "msg/StopState": {
+          "constants": {
+            "msg/STATE_LOCKED": {
+              "type": "uint8",
+              "value": 0
+            },
+            "msg/STATE_RELEASE_REFUSED": {
+              "type": "uint8",
+              "value": 1
+            },
+            "msg/STATE_RUNNING": {
+              "type": "uint8",
+              "value": 2
+            }
+          },
+          "type_hash": "RIHS01_e0e027765102526c80b189589a780e5900e41fcd8cacb4c74c13d19e4c7ccc80"
         }
       },
       "package_version": "0.0.0"

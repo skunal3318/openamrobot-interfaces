@@ -4,8 +4,10 @@
 
 std_msgs/Header header
 
-uint16 CONTRACT_VERSION=2         # current version of this interface — bumped 1->2 for
-                                   # site_config (field addition, see CONTRACT.md)
+uint16 CONTRACT_VERSION=3         # current version of this interface — 1->2 bumped for
+                                   # StopState.msg (platform-sw#119/#90, merged main
+                                   # 50ed777); 2->3 bumped here for site_config (field
+                                   # addition, see CONTRACT.md)
 uint16 contract_version           # producer sets this to CONTRACT_VERSION
 
 string profile_id
@@ -32,7 +34,7 @@ NavTaskStatus task
 RecoveryStatus recovery
 ProtectionStatus protection
 ActiveConstraint[] constraints
-SiteConfigStatus site_config      # added in CONTRACT_VERSION 2 (platform-sw#36,
+SiteConfigStatus site_config      # added in CONTRACT_VERSION 3 (platform-sw#36,
                                    # interfaces#27) - map/site-config identity and
                                    # floor-coverage. UNKNOWN until the producer has
                                    # loaded a site profile and compared it.
@@ -110,7 +112,7 @@ uint16 ESTOP_ACTIVE=9003          # only on fresh I8 telemetry reporting E-stop
                                    # BASE_LINK_LOST/BASE_NOT_READY, not this
 uint16 BATTERY_LOW=9004
 
-# site configuration (CONTRACT_VERSION 2, platform-sw#36 / interfaces#27)
+# site configuration (CONTRACT_VERSION 3, platform-sw#36 / interfaces#27)
 uint16 SITE_CONFIG_NOT_LOADED=10001
 uint16 MAP_ID_MISMATCH=10002
 uint16 MAP_STALE=10003

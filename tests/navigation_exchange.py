@@ -37,7 +37,7 @@ def publish(topic, ready):
         message.navigation_readiness = NavigationStatus.NAVIGATION_READINESS_NOT_READY
         message.not_ready_reasons = [NavigationStatus.BASE_LINK_LOST]
         message.active_reasons = [NavigationStatus.BASE_LINK_LOST]
-        # CONTRACT_VERSION 2: site_config round-trips as a nested field, same as the
+        # CONTRACT_VERSION 3: site_config round-trips as a nested field, same as the
         # existing sensors[] / stack / localization sub-messages below.
         message.site_config.state = message.site_config.STATE_MATCHED
         message.site_config.floor_coverage = message.site_config.COVERAGE_FULL
@@ -99,7 +99,7 @@ def check_values(message):
         or site_config.config_id != "verification-config"
         or site_config.config_version != "b" * 64
     ):
-        raise RuntimeError("FAIL: site_config (CONTRACT_VERSION 2) did not round-trip")
+        raise RuntimeError("FAIL: site_config (CONTRACT_VERSION 3) did not round-trip")
 
 
 def consume():
@@ -112,7 +112,7 @@ def consume():
     if site_config_type != "openamr_nav_msgs/SiteConfigStatus":
         print(
             "CONTRACT_MISMATCH: NavigationStatus.site_config missing or wrong type "
-            f"(CONTRACT_VERSION 2 expected, got {site_config_type!r}) - this exit code "
+            f"(CONTRACT_VERSION 3 expected, got {site_config_type!r}) - this exit code "
             "is also what a deliberately-reverted install should produce",
             flush=True,
         )
